@@ -1,16 +1,21 @@
 import tkinter
 from tkinter.filedialog import askopenfilename
+print('conf lode')
 from config import config
 from tkinter import Button,Label
+print('model')
 from model import model
 class main(tkinter.Tk):
     def __init__(self,model,*args,**kwargs):
         super().__init__(*args,**kwargs)
         self.config=config()
         if self.config.get_name("noita_path") == None:
-            path=askopenfilename(
-                initialdir = "C:\\",title = "get noita.exe")
-            path='/'.join(path.split('/')[:-1])+'/'
+            split_path=[None]
+            while split_path[-1]!="noita.exe":
+                path=askopenfilename(title = "get noita.exe")
+                split_path=path.split('/')
+
+            path='/'.join(split_path[:-1])+'/'
             self.config.set_name("noita_path",path)
             print(self.config.get_name("noita_path"))
         Button(self,text="install mod",command=model.install_mod).pack()
@@ -20,8 +25,9 @@ class main(tkinter.Tk):
 
     def run(self):
         self.mainloop()
-
-if __name__ =="__main__":
-    model=model()
-    root=main(model)
-    root.run()
+print('model init')
+model=model()
+print('root init')
+root=main(model)
+print('run')
+root.run()

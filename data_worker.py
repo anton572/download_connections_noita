@@ -1,9 +1,7 @@
 import io
-from importer import im
 import subprocess
-requests=im("requests")
-
-zipfile=im("zipfile")
+import requests
+import zipfile
 def download_githab(url):
     return requests.get(url)
 
